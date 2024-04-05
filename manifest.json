@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "Read Products",
+    "version": "0.1.0",
+    
+    "description": "Read Modification on Changes",
+    "icons":{
+        "16": "/images/dice_1.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://soraza.arca.digital/pos",
+			"https://larico.arca.digital/pos",
+			"https://gri.arca.digital/pos"],
+            "js":["contentScript.js"]
+        }
+    ],
+    "background": {
+
+
+        "service_worker": "inter.js"
+  
+      },
+   
+    "action":{
+        "default_icon":{
+            "16": "/images/dice_1.png"
+        },
+        "default_title": "Lector Voz"
+    }
+
+  }
