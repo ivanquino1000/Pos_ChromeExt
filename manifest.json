@@ -1,11 +1,11 @@
 {
     "manifest_version": 3,
     "name": "Read Products",
-    "version": "0.1.0",
+    "version": "1.0",
     
     "description": "Read Modification on Changes",
     "icons":{
-        "16": "/images/dice_1.png"
+        "16": "/images/quickPrint-icon.png"
     },
     "content_scripts": [
         {
@@ -15,18 +15,13 @@
             "js":["contentScript.js"]
         }
     ],
-    "background": {
-
-
-        "service_worker": "inter.js"
-  
-      },
+    
    
     "action":{
         "default_icon":{
-            "16": "/images/dice_1.png"
+            "16": "/images/quickPrint-icon.png"
         },
-        "default_title": "Lector Voz"
+        "default_title": "Impresion Rapida"
     }
 
   }

@@ -1,6 +1,7 @@
 const todo = document.getElementsByClassName("container-fluid p-0")[0];
 let lastTotal = 0;
 let actionBt;
+
 window.onload = function(){
     obs = new MutationObserver(talk);
     obs.observe(todo,opt);
@@ -9,6 +10,7 @@ window.onload = function(){
     const input = document.getElementsByClassName("fa fa-bars")[0];
     codigo.click();
     input.click();
+    appendButton_UI()
 }
 let opt = {
     childList: true,
@@ -41,9 +43,121 @@ document.addEventListener("keydown", e => {
             break;
     }
 })
+
+appendButton_UI = function(){
+    const buttonContainerDiv = document.querySelector('.col-md-4')
+
+    const quickPrint_Button = document.createElement('button');
+    const documentType_Panel = document.createElement('div')
+    const nota_button = document.createElement('button');
+    const boleta_button = document.createElement('button');
+    const factura_button = document.createElement('button');
+    const cancel_button = document.createElement('button');
+
+    const showPanelButton_style = {
+        backgroundColor: '#46abfe',
+        color: 'white',
+        border: 'none',
+        padding: '10px 20px',
+        borderRadius: '0px',
+        cursor: 'pointer',
+        position: 'absolute',
+        top: '50%',
+        left: '85%',
+        transform: 'translate(-50%, -50%)',
+        width: '160px',
+        height: '50px'
+    };
+
+    const optionButton_style = {
+        backgroundColor: '#46abfe',
+        color: 'white',
+        padding: '10px 20px',
+        cursor: 'pointer',
+        border: 'none',
+        width: '80%',
+        height: '20%',
+        fontSize: '25px', 
+        fontFamily: 'Arial, sans-serif', 
+    };
+
+    const documentTypePanel_style = {
+        backgroundColor: '#46abfe',
+        color: 'white',
+        border: 'none',
+        padding: '20px',
+        display: 'flex',
+        'flex-direction': 'column',
+        'justify-content': 'space-between',
+        alignItems: 'center',
+        height: '40%',
+        width: '450px',
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+        zIndex: '9999', 
+        display: 'none' 
+
+    }
+
+    Object.assign(quickPrint_Button.style, showPanelButton_style)
+
+    Object.assign(nota_button.style, optionButton_style)
+    Object.assign(boleta_button.style, optionButton_style)
+    Object.assign(factura_button.style, optionButton_style)
+    Object.assign(cancel_button.style, optionButton_style)
+
+    Object.assign(documentType_Panel.style, documentTypePanel_style)
+
+    nota_button.innerHTML  = 'Nota de Venta <br>(Clientes Varios)';
+    boleta_button.innerHTML  = 'Boleta <br>(Clientes Varios)';
+    factura_button.innerHTML  = 'Factura <br>(Clientes Varios)';
+    cancel_button.innerHTML  = 'Cancelar';
+
+    documentType_Panel.appendChild(nota_button)
+    documentType_Panel.appendChild(boleta_button)
+    documentType_Panel.appendChild(factura_button)
+    documentType_Panel.appendChild(cancel_button)
+
+    nota_button.addEventListener('click',()=>{
+        init('F9')
+        documentType_Panel.style.display = 'none'; 
+        console.log('option button preseed')
+    })
+    boleta_button.addEventListener('click',()=>{
+        init('F10')
+        documentType_Panel.style.display = 'none'; 
+        console.log('option button preseed')
+    })
+    factura_button.addEventListener('click',()=>{
+        init('F7')
+        documentType_Panel.style.display = 'none'; 
+        console.log('option button preseed')
+    })
+    cancel_button.addEventListener('click',()=>{
+        documentType_Panel.style.display = 'none'; 
+    })
+
+    // show Document Type Selection Panel
+    quickPrint_Button.addEventListener('click',()=>{
+       documentType_Panel.style.display = 'flex'; 
+    })
+    quickPrint_Button.textContent = 'Impresion Rapida (Clientes Varios)';
+
+    buttonContainerDiv.appendChild(quickPrint_Button)
+    buttonContainerDiv.appendChild(documentType_Panel)
+
+
+}
+
+
+
 init = function (a){
     try{ 
-        const b = document.getElementsByClassName("row text-white m-0 p-0 h-50 d-flex align-items-center bg-info pointer")[0];
+        
+        const b = document.getElementsByClassName("row text-white m-0 p-0 h-50 d-flex align-items-center bg-info pointer")[0]; 
         const total = document.getElementsByClassName("font-weight-semibold h5")[1].innerHTML;
         const select = document.getElementsByClassName("el-input el-input--small el-input--suffix")[0];
         const cliente = document.getElementsByClassName("el-select-dropdown__item")[0];
@@ -93,9 +207,9 @@ function print(m){
             switch(m.target.className){
                 case "control-label":
                     try{
-                        const docTypeF = document.getElementsByClassName("el-radio-button el-radio-button--small")[0];
-                        const docTypeB = document.getElementsByClassName("el-radio-button el-radio-button--small")[1];
-                        const docTypeN = document.getElementsByClassName("el-radio-button el-radio-button--small")[2];
+                        const docTypeF = document.getElementsByClassName("el-radio-button el-radio-button--small")[0]; //Factura
+                        const docTypeB = document.getElementsByClassName("el-radio-button el-radio-button--small")[1]; //Boleta
+                        const docTypeN = document.getElementsByClassName("el-radio-button el-radio-button--small")[2]; //Nota de Venta
                         
                         switch (actionBt){
                             case 'F9':
